@@ -24,7 +24,7 @@ function createStream(stream) {
           SUB: 
         </span>`;
       sub.forEach(server => {
-        subHtml += `<span data-url="${server.url}">${server.name}</span>`;
+        subHtml += `<div data-url="${server.url}">${server.name}</div>`;
       });
       subHtml += '</div>';
     }
@@ -36,7 +36,7 @@ function createStream(stream) {
           DUB: 
         </span>`;
       dub.forEach(server => {
-        dubHtml += `<span data-url="${server.url}">${server.name}</span>`;
+        dubHtml += `<div data-url="${server.url}">${server.name}</div>`;
       });
       dubHtml += '</div>';
     }
@@ -44,7 +44,7 @@ function createStream(stream) {
     listServer.innerHTML = subHtml + dubHtml;
 
     // Add event listeners to spans
-    document.querySelectorAll('.server_sub span, .server_dub span').forEach(span => {
+    document.querySelectorAll('.server_sub>div, .server_dub>div').forEach(span => {
       span.addEventListener('click', function() {
         const url = this.getAttribute('data-url');
         boxStream.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
