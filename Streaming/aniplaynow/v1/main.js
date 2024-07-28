@@ -24,7 +24,7 @@ function createStream(stream) {
           SUB: 
         </span>`;
       sub.forEach(server => {
-        subHtml += `<div data-url="${server.url}">${server.name}</div>`;
+        subHtml += `<div class="${server.url === initialStream.url ? 'active' : ''}" data-url="${server.url}">${server.name}</div>`;
       });
       subHtml += '</div>';
     }
@@ -36,7 +36,7 @@ function createStream(stream) {
           DUB: 
         </span>`;
       dub.forEach(server => {
-        dubHtml += `<div data-url="${server.url}">${server.name}</div>`;
+        dubHtml += `<div class="${server.url === initialStream.url ? 'active' : ''}" data-url="${server.url}">${server.name}</div>`;
       });
       dubHtml += '</div>';
     }
