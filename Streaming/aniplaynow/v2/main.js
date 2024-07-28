@@ -36,13 +36,13 @@ function createStream() {
     listServerContainer.innerHTML = subHtml + dubHtml;
 
     // Add event listeners to spans
-    document.querySelectorAll('.server_sub span, .server_dub span').forEach(span => {
+    document.querySelectorAll('.server_sub>div, .server_dub>div').forEach(span => {
       span.addEventListener('click', function() {
         const url = this.getAttribute('data-url');
         boxStream.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
 
         // Remove active class from all spans and add to the clicked one
-        document.querySelectorAll('.server_sub span, .server_dub span').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.server_sub>div, .server_dub>div').forEach(s => s.classList.remove('active'));
         this.classList.add('active');
       });
     });
