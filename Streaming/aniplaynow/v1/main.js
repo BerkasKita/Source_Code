@@ -48,6 +48,10 @@ function createStream(stream) {
       span.addEventListener('click', function() {
         const url = this.getAttribute('data-url');
         boxStream.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
+        
+        // Remove active class from all spans and add to the clicked one
+        document.querySelectorAll('.server_sub span, .server_dub span').forEach(span => span.classList.remove('active'));
+        this.classList.add('active');
       });
     });
   } else {
