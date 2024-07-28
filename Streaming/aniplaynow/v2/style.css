@@ -1,3 +1,6 @@
+.none {
+    display: none !important;
+}
 .box_stream {
     position: relative;
     max-width: 100%;
