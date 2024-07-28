@@ -1,9 +1,9 @@
 function createStream() {
   const boxStream = document.querySelector('.box_stream');
-  const listServer = document.querySelector('.arrr_list');
+  const arrrList = document.querySelector('.arrr_list');
 
-  const sub = Array.from(listServer.querySelectorAll('span[data-type="sub"]'));
-  const dub = Array.from(listServer.querySelectorAll('span[data-type="dub"]'));
+  const sub = Array.from(arrrList.querySelectorAll('span[data-type="sub"]'));
+  const dub = Array.from(arrrList.querySelectorAll('span[data-type="dub"]'));
 
   // Choose first stream from sub or dub
   let initialStream = sub.length > 0 ? sub[0] : (dub.length > 0 ? dub[0] : null);
@@ -12,23 +12,43 @@ function createStream() {
     // Create streaming iframe
     boxStream.innerHTML = `<iframe src="${initialStream.getAttribute('data-url')}" frameborder="0" allowfullscreen></iframe>`;
 
-    // Add class 'active' to initial stream
-    initialStream.classList.add('active');
+    // Create server list
+    let subHtml = '';
+    let dubHtml = '';
+
+    if (sub.length > 0) {
+      subHtml = '<div class="server_sub">';
+      sub.forEach(server => {
+        subHtml += `<span data-url="${server.getAttribute('data-url')}" class="${server.getAttribute('data-url') === initialStream.getAttribute('data-url') ? 'active' : ''}">${server.textContent}</span>`;
+      });
+      subHtml += '</div>';
+    }
+
+    if (dub.length > 0) {
+      dubHtml = '<div class="server_dub">';
+      dub.forEach(server => {
+        dubHtml += `<span data-url="${server.getAttribute('data-url')}" class="${server.getAttribute('data-url') === initialStream.getAttribute('data-url') ? 'active' : ''}">${server.textContent}</span>`;
+      });
+      dubHtml += '</div>';
+    }
+
+    document.querySelector('.list_server').innerHTML = subHtml + dubHtml;
 
     // Add event listeners to spans
-    listServer.querySelectorAll('span').forEach(span => {
+    document.querySelectorAll('.server_sub>div, .server_dub>div').forEach(span => {
       span.addEventListener('click', function() {
         const url = this.getAttribute('data-url');
         boxStream.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
 
         // Remove active class from all spans and add to the clicked one
-        listServer.querySelectorAll('span').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.server_sub>div, .server_dub>div').forEach(s => s.classList.remove('active'));
         this.classList.add('active');
       });
     });
   } else {
     // If both sub and dub are empty
     boxStream.innerHTML = '<span>404</span>';
+    document.querySelector('.list_server').innerHTML = '';
   }
 }
 
