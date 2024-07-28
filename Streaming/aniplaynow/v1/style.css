@@ -90,3 +90,6 @@
     color: hsla(0, 0%, 100%, .95);
     background-color: hsla(0, 0%, 100%, .1);
 }
+.box_list>.list_server>div>div.active {
+    background-color: hsl(269 75% 31% / 1);
+}
